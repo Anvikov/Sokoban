@@ -13,7 +13,7 @@ import java.util.List;
 
 public class Solution {
     public static DrugsController drugsController = new DrugsController();
-    public static boolean isStopped = false;
+    public volatile static boolean isStopped = false;
 
     public static void main(String[] args) throws InterruptedException {
         Thread apteka = new Thread(new Apteka());
@@ -26,34 +26,38 @@ public class Solution {
 
         Thread.sleep(1000);
         isStopped = true;
-        if (isStopped = true) {
-            apteka.interrupt();
-            man.interrupt();
-            woman.interrupt();
+    }
+
+    public static class Apteka implements Runnable{
+
+        @Override
+        public void run()
+        {
+            while (!isStopped){
+                drugsController.buy(getRandomDrug() ,getRandomCount());
+                try
+                {
+                    Thread.sleep(300);
+                }
+                catch (InterruptedException e)
+                {
+                    e.printStackTrace();
+                }
+            }
+
         }
     }
 
-    public static class Apteka implements Runnable {
+    public static class Person  implements Runnable{
 
         @Override
-        public void run() {
-            drugsController.buy(getRandomDrug(), getRandomCount());
-            try {
-                Thread.sleep(300);
-            } catch (InterruptedException e) {
+        public void run()
+        {
+            while (!isStopped){
+                drugsController.sell(getRandomDrug(), getRandomCount());
+                waitAMoment();
             }
-        }
-    }
 
-    public static class Person implements Runnable {
-
-        @Override
-        public void run() {
-            drugsController.sell(getRandomDrug(), getRandomCount());
-            try {
-                Thread.sleep(100);
-            } catch (InterruptedException e) {
-            }
         }
     }
 
