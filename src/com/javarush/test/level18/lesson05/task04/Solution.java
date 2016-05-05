@@ -7,24 +7,24 @@ package com.javarush.test.level18.lesson05.task04;
 */
 
 import java.io.*;
-import java.util.ArrayList;
 
 public class Solution {
     public static void main(String[] args) throws IOException {
-        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-        FileInputStream file1 = new FileInputStream(reader.readLine());
-        FileOutputStream file2 = new FileOutputStream(reader.readLine());
+        BufferedReader bufferedReader=new BufferedReader(new InputStreamReader(System.in));
 
-        byte[] b=new byte[file1.available()];
-        int avab=file1.available();
-        for (int i = 0; i <avab ; i++) {
-            b[i]= (byte) file1.read();
-        }
+        FileInputStream file1=new FileInputStream(bufferedReader.readLine());
+        FileOutputStream file2=new FileOutputStream(bufferedReader.readLine());
+        bufferedReader.close();
 
-        for (int i = avab; i >=0 ; i--) {
-            file2.write(b[i]);
-        }
+        byte[] bytes=new byte[file1.available()];
+
+        file1.read(bytes,0,bytes.length);
         file1.close();
+
+        for (int i = bytes.length-1; i >=0 ; i--) {
+            file2.write(bytes[i]);
+        }
+
         file2.close();
     }
 }
