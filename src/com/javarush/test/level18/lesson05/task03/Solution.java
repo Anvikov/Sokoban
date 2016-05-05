@@ -10,24 +10,30 @@ package com.javarush.test.level18.lesson05.task03;
 
 import java.io.*;
 
-
 public class Solution {
-    public static void main(String[] args) throws Exception {
-        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-        String file1 = reader.readLine();
-        String file2 = reader.readLine();
-        String file3 = reader.readLine();
-        FileInputStream inputStream = new FileInputStream(file1);
-        FileOutputStream outputStream1 = new FileOutputStream(file2);
-        FileOutputStream outputStream2 = new FileOutputStream(file3);
-        byte[] b = new byte[inputStream.available()];
-        while (inputStream.available()>0){
-            int countOfReadingBytes = inputStream.read(b);
-            outputStream1.write(b, 0, countOfReadingBytes/2);
-            outputStream2.write(b, countOfReadingBytes/2, countOfReadingBytes/2);
-        }
-        inputStream.close();
-        outputStream1.close();
-        outputStream2.close();
+    public static void main(String[] args) throws IOException {
+        BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
+
+        FileInputStream file1 = new FileInputStream(bufferedReader.readLine());
+        FileOutputStream file2 = new FileOutputStream(bufferedReader.readLine());
+        FileOutputStream file3 = new FileOutputStream(bufferedReader.readLine());
+        bufferedReader.close();
+
+        int available = file1.available();
+        int file2length = (available % 2 == 0) ? available / 2 : (available / 2) + 1;
+        int file3length = available - file2length;
+
+        byte[] first = new byte[file2length];
+        byte[] second = new byte[file3length];
+
+        file1.read(first, 0, file2length);
+        file1.read(second, 0, file3length);
+
+        file2.write(first);
+        file3.write(second);
+
+        file1.close();
+        file2.close();
+        file3.close();
     }
 }
