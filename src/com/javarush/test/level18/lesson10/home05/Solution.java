@@ -15,30 +15,17 @@ package com.javarush.test.level18.lesson10.home05;
 */
 
 import java.io.*;
-import java.util.ArrayList;
-import java.util.Arrays;
 
 public class Solution {
     public static void main(String[] args) throws IOException {
-        BufferedReader reader=new BufferedReader(new InputStreamReader(System.in));
-
-        String fileName=reader.readLine();
-        String fileName2=reader.readLine();
-
-        BufferedReader fileReader=new BufferedReader(new FileReader(fileName));
-        BufferedWriter fileWriter= new BufferedWriter(new FileWriter(fileName2));
-        String[] number;
-        String line;
-        line=fileReader.readLine();
-        number=(line.split(" "));
-        for (int i = 0; i <number.length ; i++) {
-            double d=Double.parseDouble(number[i]);
-            long a=Math.round(d);
-            fileWriter.write((int) d);
-        }
-        fileWriter.flush();
-        reader.close();
-        fileReader.close();
-        fileWriter.close();
+        BufferedReader r = new BufferedReader(new InputStreamReader(System.in));
+        BufferedReader f1 = new BufferedReader(new FileReader(r.readLine()));
+        FileWriter f2 = new FileWriter(r.readLine());
+        String buff = f1.readLine();
+        for(String num : buff.split(" "))
+            f2.write(Math.round(Double.parseDouble(num)) + " ");
+        f1.close();
+        f2.close();
+        r.close();
     }
 }
