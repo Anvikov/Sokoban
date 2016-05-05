@@ -10,27 +10,34 @@ import java.util.List;
 
 public class Solution {
     public class TableInterfaceWrapper implements ATableInterface {
+        private ATableInterface origin;
 
-        private ATableInterface original;
-        public TableInterfaceWrapper(ATableInterface original) {
-            this.original = original;
+        public TableInterfaceWrapper(ATableInterface origin) {
+            this.origin = origin;
         }
+
         @Override
         public void setModel(List rows) {
             System.out.println(rows.size());
+            origin.setModel(rows);
         }
+
         @Override
         public String getHeaderText() {
-            return original.getHeaderText().toUpperCase();
+            return origin.getHeaderText().toUpperCase();
         }
+
         @Override
         public void setHeaderText(String newHeaderText) {
-
+            origin.setHeaderText(newHeaderText);
         }
     }
-    public interface ATableInterface{
+
+    public interface ATableInterface {
         void setModel(List rows);
+
         String getHeaderText();
+
         void setHeaderText(String newHeaderText);
     }
 }
