@@ -15,72 +15,62 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Solution {
-    public static Map<String, String> countries = new HashMap<String, String>();
-
+    public static Map<String,String> countries = new HashMap<String,String>();
     static {
         countries.put("UA", "Ukraine");
         countries.put("RU", "Russia");
         countries.put("CA", "Canada");
-    }
 
+    }
     public static class IncomeDataAdapter implements Customer, Contact {
         private IncomeData incomeData;
-
         public IncomeDataAdapter(IncomeData incomeData) {
             this.incomeData = incomeData;
         }
 
         @Override
         public String getName() {
-            return this.incomeData.getContactFirstName()+", "+this.incomeData.getContactLastName();
+            return incomeData.getContactLastName() + ", " + incomeData.getContactFirstName();
         }
 
         @Override
-        public String getPhoneNumber()
-        {
-            int code = incomeData.getCountryPhoneCode();
-            String numb = String.valueOf(incomeData.getPhoneNumber());
-            while (numb.length()<10)
-                numb = 0+numb;
-            String numberPh ="+"+code+"("+numb.substring(0,3)+")"+numb.substring(3,6)+"-"+numb.substring(6,8)+"-"+numb.substring(8,10);
-            //System.out.println(numberPh);
-            return numberPh;
+        public String getPhoneNumber() {
+            String phoneNumber = String.valueOf(incomeData.getPhoneNumber());
+            if (phoneNumber.length() < 10) {
+                while (10 - phoneNumber.length() > 0) {
+                    phoneNumber = "0" + phoneNumber;
+                }
+            }
+            return "+" + incomeData.getCountryPhoneCode() + "(" + phoneNumber.substring(0, 3) + ")"
+                    + phoneNumber.substring(3, 6) + "-" + phoneNumber.substring(6, 8) + "-" + phoneNumber.substring(8);
         }
 
         @Override
         public String getCompanyName() {
-            return this.incomeData.getCompany();
+            return incomeData.getCompany();
         }
 
         @Override
         public String getCountryName() {
-            return this.incomeData.getCountryCode();
+            return countries.get(incomeData.getCountryCode());
         }
     }
-
     public static interface IncomeData {
         String getCountryCode();        //example UA
-
         String getCompany();            //example JavaRush Ltd.
-
         String getContactFirstName();   //example Ivan
-
         String getContactLastName();    //example Ivanov
-
         int getCountryPhoneCode();      //example 38
-
         int getPhoneNumber();           //example 501234567
     }
 
     public static interface Customer {
         String getCompanyName();        //example JavaRush Ltd.
-
         String getCountryName();        //example Ukraine
     }
 
     public static interface Contact {
         String getName();               //example Ivanov, Ivan
-
         String getPhoneNumber();        //example +38(050)123-45-67
     }
 }
