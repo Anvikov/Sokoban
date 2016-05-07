@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
+import java.util.concurrent.TimeUnit;
 
 /* Переопределение сериализации
 Сделайте так, чтобы после десериализации нить runner продолжила работать.
@@ -23,6 +24,10 @@ public class Solution implements Serializable, Runnable {
 
     public void run() {
         // do something here, does not matter
+        try {
+            TimeUnit.MILLISECONDS.sleep(1000);
+        } catch (InterruptedException e) {}
+
     }
 
     /**
@@ -34,9 +39,13 @@ public class Solution implements Serializable, Runnable {
      */
     private void writeObject(ObjectOutputStream out) throws IOException {
         out.defaultWriteObject();
+        out.writeInt(speed);
     }
 
     private void readObject(ObjectInputStream in) throws IOException, ClassNotFoundException {
         in.defaultReadObject();
+        speed = in.readInt();
+        runner = new Thread(this);
+        runner.start();
     }
 }

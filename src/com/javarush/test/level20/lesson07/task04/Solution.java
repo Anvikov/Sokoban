@@ -23,9 +23,9 @@ public class Solution implements Serializable {
         System.out.println(new Solution(4));
     }
 
-    transient private final String pattern = "dd MMMM yyyy, EEEE";
-    transient private Date currentDate;
-    private int temperature;
+    private transient final String pattern = "dd MMMM yyyy, EEEE";
+    private transient Date currentDate;
+    private transient int temperature;
     String string;
 
     public Solution(int temperature) {
@@ -36,8 +36,6 @@ public class Solution implements Serializable {
         SimpleDateFormat format = new SimpleDateFormat(pattern);
         this.string = String.format(string, format.format(currentDate), temperature);
     }
-
-
 
     @Override
     public String toString() {
