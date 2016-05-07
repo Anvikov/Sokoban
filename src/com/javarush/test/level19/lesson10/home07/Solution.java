@@ -14,22 +14,24 @@ import java.io.*;
 
 public class Solution {
     public static void main(String[] args) throws IOException {
-        BufferedReader reader=new BufferedReader(new InputStreamReader(System.in));
-        BufferedReader file1=new BufferedReader(new FileReader(reader.readLine()));
-        BufferedWriter file2=new BufferedWriter(new FileWriter(reader.readLine()));
-
+        String file1 = args[0];
+        String file2 = args[1];
+        BufferedReader readerFile1 = new BufferedReader(new InputStreamReader(new FileInputStream(file1)));
+        BufferedWriter writerFile2 = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(file2)));
         String line;
-        while((line=file1.readLine())!=null){
-            String[]stroka=line.split(" ");
-            System.out.println(line);
-            for (int i = 0; i <stroka.length ; i++) {
-                System.out.println(stroka[i]);
-                if (stroka[i].length()>6)file2.write(stroka[i]+",");
-                file2.flush();
+        boolean firstWord = true;
+        while ((line = readerFile1.readLine()) != null) {
+            String[] strings = line.split(" ");
+            for (String s : strings) {
+                if (s.length() > 6 && firstWord) {
+                    writerFile2.write(s);
+                    firstWord = false;
+                } else if (s.length() > 6){
+                    writerFile2.write("," + s);
+                }
             }
         }
-        file1.close();
-        file2.flush();
-        file2.close();
+        readerFile1.close();
+        writerFile2.close();
     }
 }
