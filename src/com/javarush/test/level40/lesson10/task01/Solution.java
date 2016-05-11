@@ -40,6 +40,12 @@ AM или PM: 1
 Секунды: 40
 */
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+
 public class Solution {
     public static void main(String[] args) {
         printDate("21.4.2014 15:56:45");
@@ -51,5 +57,66 @@ public class Solution {
 
     public static void printDate(String date) {
         //напишите тут ваш код
+        DateFormat dateFormat1 = new SimpleDateFormat("dd.M.yyyy HH:mm:ss");
+        DateFormat dateFormat2 = new SimpleDateFormat("dd.M.yyyy");
+        DateFormat dateFormat3 = new SimpleDateFormat("HH:mm:ss");
+        Calendar calendar = Calendar.getInstance();
+        Date result;
+        try
+        {
+            result = dateFormat1.parse(date);
+            calendar.setTime(result);
+            System.out.println("День: " + calendar.get(Calendar.DATE));
+            System.out.println("День недели: " + calendar.get(Calendar.DAY_OF_WEEK));
+            System.out.println("День месяца: " + calendar.get(Calendar.DAY_OF_MONTH));
+            System.out.println("День года: " + calendar.get(Calendar.DAY_OF_YEAR));
+            System.out.println("Неделя месяца: " + calendar.get(Calendar.WEEK_OF_MONTH));
+            System.out.println("Неделя года: " + calendar.get(Calendar.WEEK_OF_YEAR));
+            System.out.println("Месяц: " + calendar.get(Calendar.MONTH));
+            System.out.println("Год: " + calendar.get(Calendar.YEAR));
+            System.out.println("Эра: " + calendar.get(Calendar.ERA));
+            System.out.println("AM или PM: " + calendar.get(Calendar.AM_PM));
+            System.out.println("Часы: " + calendar.get(Calendar.HOUR));
+            System.out.println("Часы дня: " + calendar.get(Calendar.HOUR_OF_DAY));
+            System.out.println("Минуты: " + calendar.get(Calendar.MINUTE));
+            System.out.println("Секунды: " + calendar.get(Calendar.SECOND));
+            return;
+        }
+        catch (ParseException e)
+        {
+            try
+            {
+                result = dateFormat2.parse(date);
+                calendar.setTime(result);
+                System.out.println("День: " + calendar.get(Calendar.DATE));
+                System.out.println("День недели: " + calendar.get(Calendar.DAY_OF_WEEK));
+                System.out.println("День месяца: " + calendar.get(Calendar.DAY_OF_MONTH));
+                System.out.println("День года: " + calendar.get(Calendar.DAY_OF_YEAR));
+                System.out.println("Неделя месяца: " + calendar.get(Calendar.WEEK_OF_MONTH));
+                System.out.println("Неделя года: " + calendar.get(Calendar.WEEK_OF_YEAR));
+                System.out.println("Месяц: " + calendar.get(Calendar.MONTH));
+                System.out.println("Год: " + calendar.get(Calendar.YEAR));
+                System.out.println("Эра: " + calendar.get(Calendar.ERA));
+                return;
+            }
+            catch (ParseException e1)
+            {
+                try
+                {
+                    result = dateFormat3.parse(date);
+                    calendar.setTime(result);
+                    System.out.println("AM или PM: " + calendar.get(Calendar.AM_PM));
+                    System.out.println("Часы: " + calendar.get(Calendar.HOUR));
+                    System.out.println("Часы дня: " + calendar.get(Calendar.HOUR_OF_DAY));
+                    System.out.println("Минуты: " + calendar.get(Calendar.MINUTE));
+                    System.out.println("Секунды: " + calendar.get(Calendar.SECOND));
+                    return;
+                }
+                catch (ParseException e2)
+                {
+                }
+            }
+
+        }
     }
 }
