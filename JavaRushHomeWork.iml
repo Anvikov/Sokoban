@@ -18,6 +18,8 @@
     <orderEntry type="library" name="guava-18.01" level="project" />
     <orderEntry type="library" name="jackson-annotations-2.6.11" level="project" />
     <orderEntry type="library" name="commons-collections4-4.0-javadoc1" level="project" />
+    <orderEntry type="library" name="examples" level="project" />
+    <orderEntry type="library" name="lib" level="project" />
   </component>
   <component name="org.twodividedbyzero.idea.findbugs">
     <option name="_basePreferences">
