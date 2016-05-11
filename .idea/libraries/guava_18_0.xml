@@ -1,8 +1,6 @@
 <component name="libraryTable">
   <library name="guava-18.0">
-    <CLASSES>
-      <root url="jar://$PROJECT_DIR$/../../../../JavaRush/Frameworks/guava-18.0.jar!/" />
-    </CLASSES>
+    <CLASSES />
     <JAVADOC />
     <SOURCES />
   </library>

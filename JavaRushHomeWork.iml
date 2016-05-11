@@ -20,6 +20,8 @@
     <orderEntry type="library" name="commons-collections4-4.0-javadoc1" level="project" />
     <orderEntry type="library" name="examples" level="project" />
     <orderEntry type="library" name="lib" level="project" />
+    <orderEntry type="library" name="Java EE 6-Java EE 6" level="project" />
+    <orderEntry type="library" name="demo" level="project" />
   </component>
   <component name="org.twodividedbyzero.idea.findbugs">
     <option name="_basePreferences">
