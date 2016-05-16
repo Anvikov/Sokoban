@@ -13,7 +13,7 @@ public class Model {
     private EventListener eventListener;
     private GameObjects gameObjects;
     private int currentLevel = 1;
-    private LevelLoader levelLoader = new LevelLoader(Paths.get("D:\\Yandex\\YandexDisk\\JavaRush\\JavaRushHomeWork\\src\\com\\javarush\\test\\level34\\lesson15\\big01\\res\\levels.txt"));
+    private LevelLoader levelLoader = new LevelLoader(Paths.get("D:\\levels.txt"));
 
     public void setEventListener(EventListener eventListener) {
         this.eventListener = eventListener;
